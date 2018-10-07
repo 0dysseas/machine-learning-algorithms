@@ -21,10 +21,11 @@ hypothesis = sigmoid(X*theta);
 
 J = -(1/m) * sum(y.*log(hypothesis) + (1-y).*log(1-hypothesis)) + (lambda/(2*m))*sum(theta(2:length(theta)).^2);
 
-grad(1) = (1/m)*sum((hypothesis-y).*X(:,1));
-grad_rest = (1/m)*sum((hypothesis-y).*X(:, 1)) + (lambda/m).*theta(2:length(theta));
+grad(1) = (1/m)*sum((hypothesis - y).*X(:,1));
 
-grad = [grad(1); grad_rest];
+for iter = 2 : length(theta)
+   grad(iter,1) =  (1/m)*sum((hypothesis - y).*X(:,iter)) + (lambda / m) .* theta(iter,:);
+end
 
 % =============================================================
 
