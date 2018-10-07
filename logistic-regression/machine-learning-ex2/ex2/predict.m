@@ -1,4 +1,4 @@
-function p = predict(theta, X)
+function p = predict(theta, X,y)
 %PREDICT Predict whether the label is 0 or 1 using learned logistic 
 %regression parameters theta
 %   p = PREDICT(theta, X) computes the predictions for X using a 
@@ -15,10 +15,17 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
+%Naive solution- just to get a better for matrix multiplications
+%for i = 1:m
+%   if sigmoid(theta' *X(i,:)')>=0.5
+%      p(i) = 1;
+% else
+%        p(i) = 0;
+%    end
+%end
 
 
-
-
+p = sigmoid(X * theta)>=0.5 ;
 
 
 % =========================================================================
