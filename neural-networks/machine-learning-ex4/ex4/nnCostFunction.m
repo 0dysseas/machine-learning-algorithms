@@ -82,14 +82,31 @@ end
 %y_recoded
 
 %Calculate the cost function (without lambda)
-J = (1/m) * sum( sum (-y_recoded.*log(hypothesis) - (1-y_recoded) .*log(1-hypothesis) ) );;
+J = (1/m) * sum( sum (-y_recoded.*log(hypothesis) - (1-y_recoded) .*log(1-hypothesis) ) );
+
+%Get only the terms that don't correspond to the bias(i.e. 1st column)
+theta1_spliced = Theta1(:, 2:end);
+theta2_spliced = Theta2(:, 2:end);
+
+regularization = (lambda/(2*m)) * (sum( sum(theta1_spliced.^2)) + sum( sum(theta2_spliced.^2)));
+
+J = J + regularization;
 
 
+%Backpropagate
 
-
-
-
-
+for t = 1:m
+ 
+  a1 = X(t, :);
+  a2 = sigmoid(Theta1 * a1');  
+  a2 = [1; a2];
+  a3 = sigmoid(Theta2 * alpha_two);
+  
+  for k = 1:num_labels
+    
+  end
+  
+end
 
 
 
