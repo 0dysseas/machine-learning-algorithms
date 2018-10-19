@@ -62,12 +62,20 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+X = [ones(m, 1) X];
+alpha_two = sigmoid(Theta1 * X');
+alpha_two = [ones(m , 1) alpha_two'];
+hypothesis = sigmoid(Theta2 * alpha_two');
 
+y_recoded = zeros(num_labels, m);
 
+for index=1:m,
+  y_recoded(y(index),index) = 1;
+end
 
+%y_recoded
 
-
-
+J = (1/m) * sum( sum (-y_recoded.*log(hypothesis) - (1-y_recoded) .*log(1-hypothesis) ) );;
 
 
 
