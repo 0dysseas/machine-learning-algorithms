@@ -62,11 +62,17 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+%Add the bias
 X = [ones(m, 1) X];
+
+%Calculate the activation functions of each layer
 alpha_two = sigmoid(Theta1 * X');
 alpha_two = [ones(m , 1) alpha_two'];
+
+%Calculate the final hypothesis
 hypothesis = sigmoid(Theta2 * alpha_two');
 
+%Recode the labels to contain only 0s and 1s
 y_recoded = zeros(num_labels, m);
 
 for index=1:m,
@@ -75,6 +81,7 @@ end
 
 %y_recoded
 
+%Calculate the cost function (without lambda)
 J = (1/m) * sum( sum (-y_recoded.*log(hypothesis) - (1-y_recoded) .*log(1-hypothesis) ) );;
 
 
