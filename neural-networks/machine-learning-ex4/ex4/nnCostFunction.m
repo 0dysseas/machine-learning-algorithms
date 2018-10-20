@@ -113,9 +113,9 @@ for t = 1:m
   %Remove the bias unit of d2
   d2 = d2(2:end);
   
-  %Accumulate gradients
-  Theta2_grad = Theta2_grad + d3 * a2';   
+  %Accumulate gradients  
   Theta1_grad = Theta1_grad + d2 * a1;
+  Theta2_grad = Theta2_grad + d3 * a2'; 
   
   
 end
