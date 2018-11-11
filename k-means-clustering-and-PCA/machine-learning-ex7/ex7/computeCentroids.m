@@ -25,7 +25,10 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
-
+sz = size(idx,1);
+for centr = 1:sz
+  
+end
 
 
 
