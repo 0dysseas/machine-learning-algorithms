@@ -41,13 +41,14 @@ Theta_grad = zeros(size(Theta));
 
 J_unreg = (1/2)* sum(((X*Theta' - Y).^2)(R==1));
 
-X_grad = ((X*Theta' - Y) .*(R==1)) * Theta;
-Theta_grad = ((X*Theta' - Y) .*(R==1))' * X;
+X_grad_unreg = ((X*Theta' - Y) .*(R==1)) * Theta;
+Theta_grad_unreg = ((X*Theta' - Y) .*(R==1))' * X;
 
 
 J = J_unreg + (lambda/2)*sum(sum(Theta.^2)) + (lambda/2)*sum(sum(X.^2));
 
-
+X_grad = ((X*Theta' - Y) .*(R==1)) * Theta + lambda*X;
+Theta_grad = ((X*Theta' - Y) .*(R==1))' * X + lambda*Theta;
 
 
 
