@@ -9,6 +9,8 @@ function [bestEpsilon bestF1] = selectThreshold(yval, pval)
 bestEpsilon = 0;
 bestF1 = 0;
 F1 = 0;
+normal = (yval==0); % Number of normal examples
+anomalous = (yval==1); % Number of anomalous examples 
 
 stepsize = (max(pval) - min(pval)) / 1000;
 for epsilon = min(pval):stepsize:max(pval)
@@ -23,19 +25,15 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
-
-
-
-
-
-
-
-
-
-
-
-
-    % =============================================================
+  cvPredictions = (pval < epsilon);    
+  tp = sum((cvPredictions == 1) & anomalous);
+  fp = sum((cvPredictions == 1) & normal);
+  fn = sum((cvPredictions == 0) & anomalous);
+  
+  precision = tp / (tp+fp);
+  recall = tp / (tp+fn);
+  
+  F1 = (2*precision*recall)/(precision+recall);
 
     if F1 > bestF1
        bestF1 = F1;
